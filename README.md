@@ -71,7 +71,7 @@ A responsive and attractive website for the **AI for Resilient & Responsible DeF
 ### Dr. Oshani Seneviratne (Primary Contact)
 - **Affiliation**: Assistant Professor of Computer Science, Rensselaer Polytechnic Institute (RPI)
 - **Research**: AI and decentralized systems, smart contract innovations
-- **Contact**: senevo@rpi.edu, +1 (857) 998-7451
+- **Contact**: senevo@rpi.edu
 - **Website**: http://oshani.info
 
 ### Dr. Zachary Feinstein
@@ -166,7 +166,6 @@ The website uses CSS custom properties for easy color customization:
 For questions about the workshop:
 - **Primary Contact**: Dr. Oshani Seneviratne
 - **Email**: senevo@rpi.edu
-- **Phone**: +1 (857) 998-7451
 
 ## 🔗 Related Links
 
