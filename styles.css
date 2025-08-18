@@ -127,6 +127,50 @@ h1, h2, h3, h4, h5, h6 {
     width: 100%;
 }
 
+/* Dropdown Menu */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: var(--white);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 1rem 0;
+    min-width: 200px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.dropdown:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-menu li {
+    list-style: none;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 0.5rem 1.5rem;
+    color: var(--dark-gray);
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.dropdown-menu a:hover {
+    background-color: var(--light-blue);
+    color: var(--primary-blue);
+}
+
 .hamburger {
     display: none;
     flex-direction: column;
@@ -571,6 +615,56 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--white);
 }
 
+/* Program Committee List */
+.program-committee-list {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem;
+    background: var(--light-blue);
+    border-radius: 15px;
+    border: 2px solid var(--primary-blue);
+}
+
+.program-committee-list ul {
+    list-style: none;
+    padding: 0;
+}
+
+.program-committee-list li {
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--primary-blue);
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--dark-gray);
+}
+
+.program-committee-list li:last-child {
+    border-bottom: none;
+    font-style: italic;
+    color: var(--medium-gray);
+}
+
+.program-committee-list li:first-child {
+    font-weight: 600;
+    color: var(--primary-blue);
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+}
+
+.member-name {
+    font-weight: 700;
+    color: var(--primary-blue);
+    font-size: 1.2rem;
+}
+
+.member-affiliation {
+    font-weight: 500;
+    color: var(--medium-gray);
+    font-size: 1rem;
+    font-style: italic;
+}
+
 /* Submission Section */
 .submission {
     padding: 100px 0;
@@ -701,6 +795,22 @@ h1, h2, h3, h4, h5, h6 {
 
     .nav-menu.active {
         left: 0;
+    }
+    
+    .dropdown-menu {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        box-shadow: none;
+        background: transparent;
+        padding: 0;
+        margin-left: 1rem;
+    }
+    
+    .dropdown-menu a {
+        padding: 0.5rem 0;
+        color: var(--medium-gray);
     }
 
     .hamburger {
