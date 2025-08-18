@@ -81,7 +81,7 @@ A responsive and attractive website for the **AI for Resilient & Responsible DeF
 - **Website**: https://www.stevens.edu/profile/zfeinste
 
 ### Dr. Wei Cai
-- **Affiliation**: Assistant Professor of Computer Science and Systems, University of Washington Tacoma
+- **Affiliation**: Assistant Professor of Computer Science and Systems, University of Washington
 - **Research**: Decentralized FinTech, Crypto Airdrops, Decentralized Exchanges
 - **Contact**: weicaics@uw.edu
 - **Website**: https://faculty.washington.edu/weicaics
