@@ -327,3 +327,153 @@ const debouncedScrollHandler = debounce(() => {
 }, 10);
 
 window.addEventListener('scroll', debouncedScrollHandler);
+
+// Image Carousel Functionality
+class ImageCarousel {
+    constructor(container) {
+        this.container = container;
+        this.slides = container.querySelectorAll('.carousel-slide');
+        this.indicators = container.querySelectorAll('.indicator');
+        this.prevBtn = container.querySelector('.carousel-btn-prev');
+        this.nextBtn = container.querySelector('.carousel-btn-next');
+        this.currentSlide = 0;
+        this.totalSlides = this.slides.length;
+        this.currentSlideSpan = container.querySelector('.current-slide');
+        this.autoPlayInterval = null;
+        
+        this.init();
+    }
+    
+    init() {
+        // Add event listeners
+        if (this.prevBtn) {
+            this.prevBtn.addEventListener('click', () => this.prevSlide());
+        }
+        if (this.nextBtn) {
+            this.nextBtn.addEventListener('click', () => this.nextSlide());
+        }
+        
+        // Indicator click handlers
+        this.indicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', () => this.goToSlide(index));
+        });
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            const gallery = document.querySelector('#gallery');
+            const hero = document.querySelector('#home');
+            const heroCarousel = hero ? hero.querySelector('.hero-carousel') : null;
+            const isInGallery = gallery && gallery.getBoundingClientRect().top < window.innerHeight && gallery.getBoundingClientRect().bottom > 0;
+            const isInHero = heroCarousel && hero.getBoundingClientRect().top < window.innerHeight && hero.getBoundingClientRect().bottom > 0;
+            
+            if (isInGallery || isInHero) {
+                if (e.key === 'ArrowLeft') {
+                    e.preventDefault();
+                    this.prevSlide();
+                } else if (e.key === 'ArrowRight') {
+                    e.preventDefault();
+                    this.nextSlide();
+                }
+            }
+        });
+        
+        // Touch/swipe support
+        this.startX = 0;
+        this.endX = 0;
+        
+        const track = this.container.querySelector('.carousel-track');
+        
+        track.addEventListener('touchstart', (e) => {
+            this.startX = e.touches[0].clientX;
+        }, { passive: true });
+        
+        track.addEventListener('touchend', (e) => {
+            this.endX = e.changedTouches[0].clientX;
+            this.handleSwipe();
+        }, { passive: true });
+        
+        // Auto-play (pauses on hover)
+        this.startAutoPlay();
+        
+        this.container.addEventListener('mouseenter', () => this.stopAutoPlay());
+        this.container.addEventListener('mouseleave', () => this.startAutoPlay());
+        
+        // Update initial state
+        this.updateSlide(0);
+    }
+    
+    handleSwipe() {
+        const swipeThreshold = 50;
+        const diff = this.startX - this.endX;
+        
+        if (Math.abs(diff) > swipeThreshold) {
+            if (diff > 0) {
+                this.nextSlide();
+            } else {
+                this.prevSlide();
+            }
+        }
+    }
+    
+    goToSlide(index) {
+        if (index < 0 || index >= this.totalSlides) return;
+        this.updateSlide(index);
+    }
+    
+    nextSlide() {
+        const next = (this.currentSlide + 1) % this.totalSlides;
+        this.updateSlide(next);
+    }
+    
+    prevSlide() {
+        const prev = (this.currentSlide - 1 + this.totalSlides) % this.totalSlides;
+        this.updateSlide(prev);
+    }
+    
+    updateSlide(index) {
+        // Remove active class from all slides and indicators
+        this.slides.forEach(slide => slide.classList.remove('active'));
+        this.indicators.forEach(indicator => indicator.classList.remove('active'));
+        
+        // Add active class to current slide and indicator
+        this.slides[index].classList.add('active');
+        if (this.indicators[index]) {
+            this.indicators[index].classList.add('active');
+        }
+        
+        // Update counter
+        if (this.currentSlideSpan) {
+            this.currentSlideSpan.textContent = index + 1;
+        }
+        
+        this.currentSlide = index;
+        
+        
+        // Reset auto-play timer
+        this.stopAutoPlay();
+        this.startAutoPlay();
+    }
+    
+    
+    startAutoPlay() {
+        this.stopAutoPlay(); // Clear any existing interval
+        this.autoPlayInterval = setInterval(() => {
+            this.nextSlide();
+        }, 5000); // Change slide every 5 seconds
+    }
+    
+    stopAutoPlay() {
+        if (this.autoPlayInterval) {
+            clearInterval(this.autoPlayInterval);
+            this.autoPlayInterval = null;
+        }
+    }
+}
+
+// Initialize carousel when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    const carouselContainer = document.querySelector('.carousel-container');
+    if (carouselContainer) {
+        new ImageCarousel(carouselContainer);
+    }
+});
