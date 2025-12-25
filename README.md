@@ -11,7 +11,7 @@ A responsive and attractive website for the **AI for Resilient & Responsible DeF
 
 ## Submission
 
-Paper submission will be available on EasyChair. The link will be announced soon.
+Paper submission will be on EasyChair: https://easychair.org/conferences/?conf=air2d2icbc2026. 
 
 ## Organizing Committee
 
